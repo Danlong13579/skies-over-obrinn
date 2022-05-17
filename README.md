@@ -1,3 +1,6 @@
 # skies-over-obrinn
 
-Unity Version **2021.3.2f1 LTS**
+Download Unity Version: **2021.3.2f1 LTS**
+Open the base fold in the repo with unity and rider
+
+[Trello](https://trello.com/b/Qu7M6i0i/skies-over-obrinn)
