@@ -16,13 +16,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 currentMovementInput;
     [SerializeField] private Vector3 moveInput;
     [SerializeField] private bool isGrounded;
-    [SerializeField] private float volacity;
+    [SerializeField] private float moveSpeed;
     [SerializeField] private int fallModifier;
     [Header("Button Settings")]
     [SerializeField] private float jumpButton;
     [SerializeField] private float runButton;
-    [SerializeField] private bool isRunning;
     [SerializeField] private float pauseButton;
+    [Header("Game Logic")]
+    [SerializeField] private bool isRunning;
 
     void Awake()
     {
