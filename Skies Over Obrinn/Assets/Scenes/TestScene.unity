@@ -324,14 +324,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 141319805}
-  m_LocalRotation: {x: 0.23414798, y: -0, z: -0, w: 0.972201}
-  m_LocalPosition: {x: -0.23, y: 3.09, z: -3.36}
+  m_LocalRotation: {x: -0, y: 0.96512485, z: -0, w: -0.2617901}
+  m_LocalPosition: {x: 0.956, y: 1.7, z: 4.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 27.083, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 210.353, z: 0}
 --- !u!1 &659734722
 GameObject:
   m_ObjectHideFlags: 0
@@ -661,7 +661,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 938867470454566200, guid: f94838a72643c5f488d80b2f50718418, type: 3}
       propertyPath: m_Name
-      value: xbot@Standard Idle
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 1985420553099462929, guid: f94838a72643c5f488d80b2f50718418, type: 3}
       propertyPath: m_RootOrder
@@ -721,13 +721,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb933fd176494548bb9eadd7147e117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charControllerComponent: {fileID: 0}
+  playerRb: {fileID: 0}
+  playerCollider: {fileID: 0}
+  playerAnimator: {fileID: 0}
+  currentMovementInput: {x: 0, y: 0}
+  moveInput: {x: 0, y: 0, z: 0}
+  isGrounded: 0
   volacity: 0
   fallModifier: 0
-  isGrounded: 0
-  moveInput: {x: 0, y: 0, z: 0}
---- !u!143 &5866666020820545429
-CharacterController:
+  jumpButton: 0
+  runButton: 0
+  isRunning: 0
+  pauseButton: 0
+--- !u!54 &5866666020820545432
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148098756435}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &5866666020820545433
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -736,11 +759,7 @@ CharacterController:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
