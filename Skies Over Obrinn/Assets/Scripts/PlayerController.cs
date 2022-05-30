@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     [Header("Game Logic")]
     [SerializeField] private bool isRunning;
 
+    [SerializeField] private bool Backward;
+
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -35,41 +37,50 @@ public class PlayerController : MonoBehaviour
         isRunning = false;
 
         #region Movement
-        playerControls.Movement.started += (ctx) => {
+        playerControls.Movement.started += (ctx) =>
+        {
             currentMovementInput = ctx.ReadValue<Vector2>();
         };
 
-        playerControls.Movement.canceled += (ctx) => {
+        playerControls.Movement.canceled += (ctx) =>
+        {
             currentMovementInput = ctx.ReadValue<Vector2>();
         };
 
-        playerControls.Movement.performed += (ctx) => {
+        playerControls.Movement.performed += (ctx) =>
+        {
             currentMovementInput = ctx.ReadValue<Vector2>();
         };
         #endregion
 
         #region Buttons
-        playerControls.Jump.started += (ctx) => {
+        playerControls.Jump.started += (ctx) =>
+        {
             jumpButton = ctx.ReadValue<float>();
         };
 
-        playerControls.Jump.canceled += (ctx) => {
+        playerControls.Jump.canceled += (ctx) =>
+        {
             jumpButton = ctx.ReadValue<float>();
         };
 
-        playerControls.PauseMenu.started += (ctx) => {
+        playerControls.PauseMenu.started += (ctx) =>
+        {
             pauseButton = ctx.ReadValue<float>();
         };
 
-        playerControls.PauseMenu.canceled += (ctx) => {
+        playerControls.PauseMenu.canceled += (ctx) =>
+        {
             pauseButton = ctx.ReadValue<float>();
         };
 
-        playerControls.Sprint.started += (ctx) => {
+        playerControls.Sprint.started += (ctx) =>
+        {
             runButton = ctx.ReadValue<float>();
         };
 
-        playerControls.Sprint.canceled += (ctx) => {
+        playerControls.Sprint.canceled += (ctx) =>
+        {
             runButton = ctx.ReadValue<float>();
         };
         #endregion
@@ -79,17 +90,27 @@ public class PlayerController : MonoBehaviour
     {
         if (runButton > 0) isRunning = true;
 
-        if (currentMovementInput.x != 0 || currentMovementInput.y != 0) {
+        if (currentMovementInput.x > 0 || currentMovementInput.y > 0)
+        {
             playerAnimator.SetBool("isWalking", true);
-            if (isRunning) {
+            if (isRunning)
+            {
                 playerAnimator.SetBool("isRunning", true);
+
             }
         }
 
-        if (currentMovementInput == Vector2.zero) {
+        if (currentMovementInput.y < 0)
+        {
+            playerAnimator.SetBool("Backwards", true);
+        }
+
+        if (currentMovementInput == Vector2.zero)
+        {
             isRunning = false;
             playerAnimator.SetBool("isRunning", false);
             playerAnimator.SetBool("isWalking", false);
+            playerAnimator.SetBool("Backwards", false);
         }
 
     }
@@ -102,6 +123,6 @@ public class PlayerController : MonoBehaviour
     void OnDisable()
     {
         playerControls.Disable();
-    }  
+    }
 
 }

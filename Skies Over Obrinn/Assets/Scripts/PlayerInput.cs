@@ -62,6 +62,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Blink"",
+                    ""type"": ""Button"",
+                    ""id"": ""be5898eb-6cd0-468a-a1a3-23a8d3149beb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -207,6 +216,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Sprint"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8beb9a00-ff4c-4080-ade1-c78d98a012e7"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Blink"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5b411902-7aba-4321-a061-f98b330cffa8"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Blink"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -242,6 +273,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_PlayerControls_Jump = m_PlayerControls.FindAction("Jump", throwIfNotFound: true);
         m_PlayerControls_PauseMenu = m_PlayerControls.FindAction("PauseMenu", throwIfNotFound: true);
         m_PlayerControls_Sprint = m_PlayerControls.FindAction("Sprint", throwIfNotFound: true);
+        m_PlayerControls_Blink = m_PlayerControls.FindAction("Blink", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -305,6 +337,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_Jump;
     private readonly InputAction m_PlayerControls_PauseMenu;
     private readonly InputAction m_PlayerControls_Sprint;
+    private readonly InputAction m_PlayerControls_Blink;
     public struct PlayerControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -313,6 +346,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerControls_Jump;
         public InputAction @PauseMenu => m_Wrapper.m_PlayerControls_PauseMenu;
         public InputAction @Sprint => m_Wrapper.m_PlayerControls_Sprint;
+        public InputAction @Blink => m_Wrapper.m_PlayerControls_Blink;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -334,6 +368,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Sprint.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnSprint;
                 @Sprint.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnSprint;
                 @Sprint.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnSprint;
+                @Blink.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnBlink;
+                @Blink.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnBlink;
+                @Blink.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnBlink;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -350,6 +387,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Sprint.started += instance.OnSprint;
                 @Sprint.performed += instance.OnSprint;
                 @Sprint.canceled += instance.OnSprint;
+                @Blink.started += instance.OnBlink;
+                @Blink.performed += instance.OnBlink;
+                @Blink.canceled += instance.OnBlink;
             }
         }
     }
@@ -378,5 +418,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
+        void OnBlink(InputAction.CallbackContext context);
     }
 }
