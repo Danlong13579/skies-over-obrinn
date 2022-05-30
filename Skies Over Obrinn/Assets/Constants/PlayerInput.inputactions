@@ -1,5 +1,5 @@
 {
-    "name": "PlayerBaseActions",
+    "name": "PlayerInput",
     "maps": [
         {
             "name": "PlayerControls",
@@ -27,6 +27,15 @@
                     "name": "PauseMenu",
                     "type": "Button",
                     "id": "3dd83138-d7d1-4cab-9592-1a767783cd77",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "f62d272a-db5c-463f-b4c4-dc3040e7982b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -141,6 +150,39 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "PauseMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bcfba59a-bd0b-4ce0-a9b5-81b8df1db145",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a32d3252-3090-4667-838a-52bc09b86b17",
+                    "path": "<Keyboard>/rightShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "88f4cd99-9f93-42c8-95e8-d92c7146b594",
+                    "path": "<Gamepad>/leftStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Sprint",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
