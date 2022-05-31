@@ -71,6 +71,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CameraRotation"",
+                    ""type"": ""Value"",
+                    ""id"": ""ded1de4b-ab34-4c53-b147-aacfbbbf19f7"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -238,6 +247,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Blink"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""869f7fe0-dd4f-44a7-894d-b15751bf3190"",
+                    ""path"": ""<Pointer>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""CameraRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f538b63-20fd-4e9b-bbea-65e600f37389"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""CameraRotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -249,6 +280,11 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
                     ""isOptional"": false,
                     ""isOR"": false
                 }
@@ -274,6 +310,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_PlayerControls_PauseMenu = m_PlayerControls.FindAction("PauseMenu", throwIfNotFound: true);
         m_PlayerControls_Sprint = m_PlayerControls.FindAction("Sprint", throwIfNotFound: true);
         m_PlayerControls_Blink = m_PlayerControls.FindAction("Blink", throwIfNotFound: true);
+        m_PlayerControls_CameraRotation = m_PlayerControls.FindAction("CameraRotation", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -338,6 +375,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerControls_PauseMenu;
     private readonly InputAction m_PlayerControls_Sprint;
     private readonly InputAction m_PlayerControls_Blink;
+    private readonly InputAction m_PlayerControls_CameraRotation;
     public struct PlayerControlsActions
     {
         private @PlayerInput m_Wrapper;
@@ -347,6 +385,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @PauseMenu => m_Wrapper.m_PlayerControls_PauseMenu;
         public InputAction @Sprint => m_Wrapper.m_PlayerControls_Sprint;
         public InputAction @Blink => m_Wrapper.m_PlayerControls_Blink;
+        public InputAction @CameraRotation => m_Wrapper.m_PlayerControls_CameraRotation;
         public InputActionMap Get() { return m_Wrapper.m_PlayerControls; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -371,6 +410,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Blink.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnBlink;
                 @Blink.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnBlink;
                 @Blink.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnBlink;
+                @CameraRotation.started -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnCameraRotation;
+                @CameraRotation.performed -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnCameraRotation;
+                @CameraRotation.canceled -= m_Wrapper.m_PlayerControlsActionsCallbackInterface.OnCameraRotation;
             }
             m_Wrapper.m_PlayerControlsActionsCallbackInterface = instance;
             if (instance != null)
@@ -390,6 +432,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Blink.started += instance.OnBlink;
                 @Blink.performed += instance.OnBlink;
                 @Blink.canceled += instance.OnBlink;
+                @CameraRotation.started += instance.OnCameraRotation;
+                @CameraRotation.performed += instance.OnCameraRotation;
+                @CameraRotation.canceled += instance.OnCameraRotation;
             }
         }
     }
@@ -419,5 +464,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnPauseMenu(InputAction.CallbackContext context);
         void OnSprint(InputAction.CallbackContext context);
         void OnBlink(InputAction.CallbackContext context);
+        void OnCameraRotation(InputAction.CallbackContext context);
     }
 }
