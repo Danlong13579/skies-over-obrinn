@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
     private PlayerInput playerInput;
@@ -110,6 +111,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(Input.GetAxis("Mouse X"));
         if (runButton > 0) isRunning = true;
         moveInput.z = currentMovementInput.y;
         moveInput.x = currentMovementInput.x;

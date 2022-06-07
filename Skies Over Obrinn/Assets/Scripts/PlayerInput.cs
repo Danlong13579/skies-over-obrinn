@@ -251,9 +251,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""869f7fe0-dd4f-44a7-894d-b15751bf3190"",
-                    ""path"": ""<Pointer>/delta"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""NormalizeVector2"",
                     ""groups"": ""PC"",
                     ""action"": ""CameraRotation"",
                     ""isComposite"": false,
